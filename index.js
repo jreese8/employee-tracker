@@ -1,5 +1,6 @@
 const db = require('./db/connection');
 const inquirer = require('inquirer');
+require("console.table");
 
 const Prompts = () => {
 
@@ -78,9 +79,7 @@ const Prompts = () => {
   db.connect(err => {
     if (err) throw err;
     console.log('Database connected.');
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
+    Prompts(); 
   });
 
-  Prompts();
+  module.exports = Prompts;
