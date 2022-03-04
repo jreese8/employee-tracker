@@ -87,29 +87,6 @@ const addDepartment = () => {
             Prompts.Prompts();
         }
 
-        const addDepartment = () => {
-            return inquirer.prompt([
-                {
-                    type: "input",
-                    name: "addDept",
-                    message: "Add a department.",
-                    validate: deptInput => {
-                        if (deptInput) {
-                            return true;
-                        } else {
-                            console.log ("Please add a department.");
-                            return false; 
-                        }
-                      }
-                    }    
-                    
-                ]).then((res) => {
-                    const mysql = `INSERT INTO departments (name) VALUES ('${res.addDept}')`; //inserting department name as template literal
-                    db.query(mysql);
-                    }).then //then go back to prompts
-                    Prompts.Prompts();
-                }
-
 const addRole = () => { //Add more to this
     return inquirer.prompt([
         {
@@ -156,6 +133,35 @@ const addEmployee = () => {
             Prompts.Prompts();
         }
 
+const updateRole = () => {
+    const selectEmployees = 'SELECT * FROM employees';
+    db.query(selectEmployees, (err, rows) => {
+      if(err){console.error(err)}
+      if(res){console.table(res)}
+
+    const selectRoles = 'SELECT * FROM roles';
+    db.query(selectRoles, (err, res) => {
+      if(err){console.error(err)}
+      if(res){console.table(res)}
+
+    return inquirer.prompt([
+        {
+          type: "input",
+          message: "Which employee like to update?",
+          name: "employeeUpdate"
+        },
+        {
+          type: "input",
+          message: "What is their new role ID number?",
+          name: "roleUpdate"
+        }
+    ]).then((res) => {
+        const dataUpdate = `UPDATE employees SET roles_id = ${res.updateRole} WHERE id = ${res.employeeUpdate}`;
+        db.query(dataUpdate);
+        }).then(Prompts())
+    })
+})
+}
 
 module.exports = {
     viewDepartments:viewDepartments,
@@ -163,5 +169,6 @@ module.exports = {
     viewEmployees:viewEmployees,
     addDepartment:addDepartment,
     addRole:addRole,
-    addEmployee:addEmployee
+    addEmployee:addEmployee,
+    updateRole:updateRole
 }

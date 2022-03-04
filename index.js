@@ -86,7 +86,7 @@ const Prompts = () => {
 
 
 const testFunc = () => {
-  console.log('this is a test function')
+  console.log('this is a test function') //tests that module.exports is working
 }
 
   module.exports = {
