@@ -1,6 +1,6 @@
 const db = require('./db/connection');
 const inquirer = require('inquirer');
-require("console.table");
+const dbFunctions = require('./assets/dbFunctions');
 
 const Prompts = () => {
 
@@ -46,33 +46,35 @@ const Prompts = () => {
     }
   ]).then(res => {
     let choice = res.choice;
+
     //call a function depending on user choice
     switch (choice) {
       case "VIEW_DEPARTMENTS":
-        viewDepartments();
+        dbFunctions.viewDepartments();
         break;
       case "VIEW_ROLES":
-        viewRoles();
+        dbFunctions.viewRoles();
         break;
       case "VIEW_EMPLOYEES":
-        viewEmployees();
+        dbFunctions.viewEmployees();
         break;
       case "ADD_DEPARTMENT":
-        addDepartment();
+        dbFunctions.addDepartment();
         break;
       case "ADD_ROLE":
-        addRole();
+        dbFunctions.addRole();
         break;
       case "ADD_EMPLOYEE":
-        addEmployee();
+        dbFunctions.addEmployee();
         break;
-      case "UPDATE_ROLE":
-        updateRole();
-        break;
-      case "EXIT":
-        exit();
-        break;
-      }
+    //   case "UPDATE_ROLE":
+    //     updateRole();
+    //     break;
+    //   case "EXIT":
+           // close database connection and exit program
+    //     db.close()
+    //     break;
+     }
     }
   )}
 
@@ -82,4 +84,12 @@ const Prompts = () => {
     Prompts(); 
   });
 
-  module.exports = Prompts;
+
+const testFunc = () => {
+  console.log('this is a test function')
+}
+
+  module.exports = {
+    Prompts:Prompts,
+    testFunc: testFunc
+  }
