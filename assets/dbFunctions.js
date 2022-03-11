@@ -1,6 +1,7 @@
 const Prompts = require('../index');
 const db = require('../db/connection');
 const inquirer = require('inquirer');
+require("console.table");
 
 const viewDepartments = () => {
     //Using database queries
@@ -14,7 +15,7 @@ const viewDepartments = () => {
                     console.log(object.name)
                 }
                 // ask user prompts
-                // START HERE
+                // START HERE cuz won't go to prompts
                 Prompts.Prompts();
             }
             else{ 
@@ -135,7 +136,7 @@ const addEmployee = () => {
 
 const updateRole = () => {
     const selectEmployees = 'SELECT * FROM employees';
-    db.query(selectEmployees, (err, rows) => {
+    db.query(selectEmployees, (err, res) => {
       if(err){console.error(err)}
       if(res){console.table(res)}
 
@@ -156,7 +157,7 @@ const updateRole = () => {
           name: "roleUpdate"
         }
     ]).then((res) => {
-        const dataUpdate = `UPDATE employees SET roles_id = ${res.updateRole} WHERE id = ${res.employeeUpdate}`;
+        const dataUpdate = `UPDATE employees SET role_id = ${res.updateRole} WHERE id = ${res.employeeUpdate}`;
         db.query(dataUpdate);
         }).then(Prompts())
     })

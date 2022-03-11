@@ -1,6 +1,7 @@
 const db = require('./db/connection');
 const inquirer = require('inquirer');
 const dbFunctions = require('./assets/dbFunctions');
+require("console.table");
 
 const Prompts = () => {
 
@@ -67,13 +68,13 @@ const Prompts = () => {
       case "ADD_EMPLOYEE":
         dbFunctions.addEmployee();
         break;
-    //   case "UPDATE_ROLE":
-    //     updateRole();
-    //     break;
-    //   case "EXIT":
-           // close database connection and exit program
-    //     db.close()
-    //     break;
+      case "UPDATE_ROLE":
+        updateRole();
+        break;
+      case "EXIT":
+          //  close database connection and exit program
+        db.close()
+        break;
      }
     }
   )}
