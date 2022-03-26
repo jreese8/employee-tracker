@@ -10,7 +10,7 @@ VALUES
   ('CTO', 2, 28),
   ('Product Manager', 2, 20),
   ('Project Manager', 2, 22),
-  ('Accoutant', 1, 10),
+  ('Accountant', 1, 10),
   ('Sales Representitive', 1, 15),
   ('Administrative Assistant', 2, 10),
   ('Customer Service Assistant', 2, 8);
